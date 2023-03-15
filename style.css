@@ -1,0 +1,150 @@
+body {
+    padding: 0;
+    margin: 0;
+  }
+  
+  html, body{
+    height: 100%;
+  }
+  
+#header{
+  background-color: #401881;
+  height: 120px;
+  font-family: 'century gothic';
+  font-size: 30px;
+  text-align: center;
+  
+  color: aliceblue;
+}
+
+
+#mensaje{
+  font-family: "century gothic";
+  font-style: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+#sample_map{
+  height: 60%;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-radius: 3%;
+  z-index: 0;
+}
+
+
+.boton2{
+  width: 50%;
+  background-color: rgb(64, 24, 129);
+  color: aliceblue;
+  font-family: 'century gothic';
+  font-size: 23px;
+  text-align: center;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  height: 20%;
+  border-radius: 100px;
+  text-align: center;
+  border: 2px solid aliceblue;
+}
+
+.boton2:hover{
+  background-color: rgb(64, 24, 129);
+  color: aliceblue;
+  font-family: 'century gothic';
+  font-size: 23px;
+  text-align: center;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  height: 20%;
+  border-radius: 100px;
+  text-align: center;
+  opacity: 0.5;
+  border: 2px solid aliceblue;
+}
+
+#botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 10%;
+}
+
+#icono_volumen{
+  color: black;
+  size: 100px;
+}
+
+#footer{
+
+  background-color: #401881;
+  height: 100px;
+  font-family: 'century gothic';
+  font-size: 30px;
+  text-align: center;
+  color: aliceblue;
+}
+
+#modal-ventana{
+  display: none;
+  margin-left: 30%;
+  margin-right: 50%;
+  margin-bottom: -10%;
+  position: fixed;
+  background-color: #401881;
+  width: 40%;
+  opacity: 90%;
+  font-family: 'century gothic';
+  font-size: 30px;
+  text-align: center;
+  color: aliceblue;
+  z-index: 11;
+  border-radius: 5%;
+}
+
+#modal-ventana2{
+  display: none;
+  margin-left: 30%;
+  margin-right: 50%;
+  margin-bottom: -10%;
+  margin-top: 20%;
+  position: fixed;
+  background-color: #401881;
+  width: 40%;
+  opacity: 90%;
+  font-family: 'century gothic';
+  font-size: 30px;
+  text-align: center;
+  color: aliceblue;
+  z-index: 11;
+  border-radius: 15px;
+}
+
+
+.img_marcador{
+  position:fixed;
+  margin-top: -7%;
+  margin-left: 12%;
+  margin-right: 0%;
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .img_marcador{
+    position:fixed;
+    margin-top: -2%;
+    margin-left: 18%;
+    margin-right: 0%;
+    z-index: -1;
+  }
+
+}
+
+

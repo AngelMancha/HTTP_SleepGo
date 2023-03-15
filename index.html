@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Ejemplo básico de Leaflet</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <link rel='stylesheet' href='style.css'>
+  
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin="">
+    </script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  
+  <div id="header">
+    <img src="images/logo1.png" alt="Logo" width="200" >
+  </div>
+
+  <div id="main">
+    <br>
+    <div class ="mensajes" >
+      <div id="mensaje"> ¡Selecciona tu destino y pulsa "Comenzar"!</div>
+    </div>
+    <br>
+    <div id="botones">
+      <button class="boton2" onclick=vibrar()>Comenzar</button>
+      <button class="boton2" onclick=detener()>Detener</button>
+    </div>
+  </div>
+
+  <!-- vetana modal -->
+  <div id="modal-ventana">
+    <button class="boton2" onclick=cerrar()>¡OK!</button>
+    
+    <div >
+      <br>
+      <img src="images/blue.png" alt="Marcador"  width=50px, height=60 >
+      <div class ="img_marcador"><img src="images/circulo.png" alt="Círculo"  width=80px, height=50 ></div>
+      <h5>Tu destino</h5>
+   </div>
+   <div>
+    <img src="images/blue.png" alt="Marcador"  width=45px, height=60 >
+    <h5>  Tu ubiación</h5>
+   </div>
+    
+  </div>
+  
+  <div id="modal-ventana2">
+
+    <h3> ¡Estás a menos de 1 Km del destino!</h3>
+
+  </div>
+  
+
+  <div id="sample_map"></div>
+
+  <div id="footer">  ¡Relájate, nosotros te despertamos! </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
+
