@@ -8,6 +8,7 @@ To make use of the application, it is enough to select the desired destination b
 
 The "stop" button stops real-time location acquisition and removes markers from the map
 
+# Demo
 - Select destination:
 
 ![visualizador](images/inicio.png)
