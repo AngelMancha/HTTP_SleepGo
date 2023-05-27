@@ -2,7 +2,7 @@
 
 # Description and instructions for use of the application:
 
-Sleep&Go is an application that allows users to fall asleep on public transport without worring about waking just on time for their stop, since the app will be the one in charge of waking them up through a vibration mode when it detects that the traveller is within a radius of one kilometer around his or her destination.
+Sleep&Go is an application that allows users to **fall asleep on public transport without worring about waking just on time for their stop**, since the app will be the one in charge of **waking them up through a vibration mode** when it detects that the traveller is **within a radius of one kilometer** around his or her destination.
 
 To make use of the application, it is enough to select the desired destination by clicking directly on the map and then press the "start" button, which will start obtaining the location in real time of the user. At all times on the map there will be two markers, one that represents the user's real-time location and another static marker which has a one kilometer circle around it to simulate the destination. Both markers are joined by a straight line and as the user gets closer to the destination, the location marker will also get closer until it enters the radius of the destination, which will cause an alert to appear on the screen and the mobile device will start to vibrate.
 
