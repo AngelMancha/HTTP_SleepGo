@@ -10,19 +10,19 @@ The "stop" button stops real-time location acquisition and removes markers from 
 
 - Select destination:
 
-![visualizador](media/inicio.png)
+![visualizador](images/inicio.png)
 
-![visualizador](media/destino.png)
+![visualizador](images/destino.png)
 
 - The markers that represents the user and destination´s coordinates:
 
-![visualizador](media/mensaje.png)
+![visualizador](images/mensaje.png)
 
-![visualizador](media/ruta.png)
+![visualizador](images/ruta.png)
 
 - Whenever the user enters the 1km radius surrounding the destination, the mobile phone will start to vibrate:
 
-![visualizador](media/cerca.png)
+![visualizador](images/cerca.png)
 
 
 # Code Description:
