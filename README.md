@@ -1,6 +1,6 @@
 ### Angel José Manch Núñez 
 
-# Sleep&Go
+# Sleep&Go Description
 
 Sleep&Go is an application that allows users to **fall asleep on public transport without worring about waking just on time for their stop**, since the app will be the one in charge of **waking them up through a vibration mode** when it detects that the traveller is **within a radius of one kilometer** around his or her destination.
 
