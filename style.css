@@ -132,12 +132,7 @@ html, body {
   z-index: -1;
 }
 
-@media (min-width: 768px) {
-  .img_marcador {
-      margin-top: -2%;
-      margin-left: 18%;
-  }
-}
+
 
 /* Estilo para el campo de entrada */
 #destino-input {
@@ -215,7 +210,7 @@ html, body {
   list-style-type: none;
   padding: 0;
 
-  margin-top: 160%;
+  margin-top: 10%;
 }
 
 #lista-opciones li {
@@ -242,4 +237,26 @@ html, body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
   z-index: 9999; /* Lo pone encima de los demás elementos */
+}
+
+@media (max-width: 768px) {
+  .img_marcador {
+      margin-top: -2%;
+      margin-left: 18%;
+  }
+
+  #lista-opciones {
+    position: absolute;
+    z-index: 11111;
+    width: 100%;
+    max-width: 300px; /* Ajusta el ancho máximo según tus necesidades */
+    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    padding: 0;
+  
+    margin-top: 160%;
+  }
+  
 }
