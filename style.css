@@ -106,7 +106,7 @@ html, body {
   z-index: 11110;
 }
 
-#modal-ventana, #modal-ventana2 {
+#modal-ventana2 {
   display: none;
   position: absolute;
   background-color: #6200ea;

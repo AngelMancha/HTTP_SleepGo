@@ -10,16 +10,16 @@ mymap.on('click', function(e) {
 
 // Definimos el nuevo icono usando la imagen green.png
 const greenIcon = L.icon({
-    iconUrl: 'images/green.png',
-    iconSize: [45, 60], // tamaño del icono
-    iconAnchor: [22, 60], // punto del icono que corresponderá a la posición del marcador
+    iconUrl: 'images/purple.png',
+    iconSize: [55, 60], // tamaño del icono
+    iconAnchor: [28, 60], // punto del icono que corresponderá a la posición del marcador
     popupAnchor: [-3, -76] // punto desde el cual se abrirá el popup relativo al icono
 });
 
 const redIcon = L.icon({
-  iconUrl: 'images/Pin-location.png',
-  iconSize: [45, 60], // tamaño del icono
-  iconAnchor: [22, 60], // punto del icono que corresponderá a la posición del marcador
+  iconUrl: 'images/purple.png',
+  iconSize: [55, 60], // tamaño del icono
+  iconAnchor: [28, 60], // punto del icono que corresponderá a la posición del marcador
   popupAnchor: [-3, -76] // punto desde el cual se abrirá el popup relativo al icono
 });
 
@@ -27,7 +27,7 @@ const redIcon = L.icon({
 let latitud_destino;
 let longitud_destino;
 let marcado = false;
-var modal = document.getElementById("modal-ventana");
+// var modal = document.getElementById("modal-ventana");
 var modal2 = document.getElementById("modal-ventana2");
 let seguimiento = null;
 let polyline = null;
@@ -148,8 +148,8 @@ function vibrar() {
   }
 
   // Se hace visible la ventana modal que muestra las indicaciones
-  let modal = document.getElementById("modal-ventana");
-  modal.style.display = "block";
+  //let modal = document.getElementById("modal-ventana");
+  //modal.style.display = "block";
   
   // Ocultar el botón "Comenzar"
   document.querySelector('.boton2.comenzar').style.display = 'none';
@@ -251,6 +251,6 @@ function detener() {
 
 // Función que cierra la ventana modal
 function cerrar() {
-  modal = document.getElementById("modal-ventana");
-  modal.style.display = "none";
+  //modal = document.getElementById("modal-ventana");
+  //modal.style.display = "none";
 }
