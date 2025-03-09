@@ -179,7 +179,7 @@ function vibrar() {
         if (dentro_del_radio == true) {
           let mensaje = document.getElementById("mensaje");
           mensaje.innerHTML = ("");
-          modal.style.display = "none";
+          //modal.style.display = "none";
           modal2.style.display = "block";
           navigator.vibrate(3000);
         } else {
