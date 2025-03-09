@@ -138,3 +138,95 @@ html, body {
       margin-left: 18%;
   }
 }
+
+/* Estilo para el campo de entrada */
+#destino-input {
+  width: 45%;
+  padding: 10px;
+  margin: 1%;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+/* Estilo para el botón de búsqueda */
+.boton2.lupa {
+  width: 10%;
+  background-color: #6200ea;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  margin: 1%;
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.boton2.lupa:hover {
+  background-color: #3700b3;
+  transform: scale(1.05);
+}
+
+/* Estilo para el campo de entrada */
+#destino-input {
+  width: 45%;
+  padding: 10px;
+  margin: 1%;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+/* Estilo para el botón de búsqueda */
+.boton2.lupa {
+  width: 10%;
+  background-color: #6200ea;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  margin: 1%;
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.boton2.lupa:hover {
+  background-color: #3700b3;
+  transform: scale(1.05);
+}
+
+/* Estilo para la lista de opciones */
+#opciones {
+  margin: 1%;
+}
+
+#lista-opciones {
+  position: absolute;
+  z-index: 11111;
+  width: 100%;
+  max-width: 400px; /* Ajusta el ancho máximo según tus necesidades */
+  max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 0;
+
+  margin-top: 110%;
+}
+
+#lista-opciones li {
+  background-color: #9c9cf5bd;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#lista-opciones li:hover {
+  background-color: #ddd;
+}
