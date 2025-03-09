@@ -32,6 +32,8 @@ var modal2 = document.getElementById("modal-ventana2");
 let seguimiento = null;
 let polyline = null;
 let circle = null;
+var listaOpciones = document.getElementById('lista-opciones');
+var overlay = document.getElementById('overlay');
 
 document.querySelector('.boton2.detener').style.display = 'none';
 
@@ -49,23 +51,27 @@ function comenzar() {
 // Función que crea un marcador en el destino del usuario
 function marcador() {
   // Creamos un marcador en el mapa que representa el destino del usuario
-  mymap.once('click', function(e) {
-    console.log(e.latlng);
-    let marcador_destino = L.marker(e.latlng, { icon: greenIcon }).addTo(mymap);
+    mymap.once('click', function(e) {
+      if (marcado == false) {
+        console.log(e.latlng);
+        let marcador_destino = L.marker(e.latlng, { icon: greenIcon }).addTo(mymap);
+    
+        // Obtenemos las coordenandas del marcador
+        latitud_destino = marcador_destino.getLatLng().lat;
+        longitud_destino = marcador_destino.getLatLng().lng;
+        marcado = true;
+    
+        // Círculo alrededor del marcador con 1 km de radio
+        circle = L.circle([latitud_destino, longitud_destino], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.2,
+          radius: 1000
+        }).addTo(mymap);
+      }
 
-    // Obtenemos las coordenandas del marcador
-    latitud_destino = marcador_destino.getLatLng().lat;
-    longitud_destino = marcador_destino.getLatLng().lng;
-    marcado = true;
-
-    // Círculo alrededor del marcador con 1 km de radio
-    circle = L.circle([latitud_destino, longitud_destino], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.2,
-      radius: 1000
-    }).addTo(mymap);
-  });
+    });
+  
 }
 
 // Función que busca el destino y muestra las opciones en una lista
@@ -75,15 +81,20 @@ function buscarDestino() {
     alert("Por favor, escribe un destino.");
     return;
   }
-
+  
   // Usamos la API de Nominatim para buscar la ubicación
   fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${destino}`)
     .then(response => response.json())
     .then(data => {
       const listaOpciones = document.getElementById('lista-opciones');
       listaOpciones.innerHTML = ''; // Limpiar la lista de opciones anteriores
-
+      marcado = true;
       if (data.length > 0) {
+        // Mostrar el overlay
+        overlay.style.display = 'block';
+
+        // Mostrar la lista de opciones
+        listaOpciones.style.display = 'block';
         data.forEach((item, index) => {
           const li = document.createElement('li');
           li.textContent = item.display_name;
@@ -104,7 +115,10 @@ function buscarDestino() {
 function seleccionarDestino(lat, lon) {
   const latlng = [lat, lon];
   let marcador_destino = L.marker(latlng, { icon: greenIcon }).addTo(mymap);
-
+  overlay.style.display = 'none';
+  
+  // Mostrar la lista de opciones
+  listaOpciones.style.display = 'none';
   // Obtenemos las coordenandas del marcador
   latitud_destino = marcador_destino.getLatLng().lat;
   longitud_destino = marcador_destino.getLatLng().lng;
@@ -225,7 +239,6 @@ function detener() {
       mymap.removeLayer(layer);
     }
   });
-
   // Eliminamos la recta que une los marcadores
   if (polyline) {
     mymap.removeLayer(polyline);

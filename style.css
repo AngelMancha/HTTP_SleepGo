@@ -208,18 +208,19 @@ html, body {
   position: absolute;
   z-index: 11111;
   width: 100%;
-  max-width: 400px; /* Ajusta el ancho máximo según tus necesidades */
-  max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+  max-width: 300px; /* Ajusta el ancho máximo según tus necesidades */
+  max-height: 500px; /* Ajusta la altura máxima según tus necesidades */
   overflow-y: auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   list-style-type: none;
   padding: 0;
 
-  margin-top: 110%;
+  margin-top: 160%;
 }
 
 #lista-opciones li {
-  background-color: #9c9cf5bd;
+  background-color: #6200ea;
+  color: #fff;
   padding: 10px;
   margin: 5px 0;
   border-radius: 8px;
@@ -229,4 +230,16 @@ html, body {
 
 #lista-opciones li:hover {
   background-color: #ddd;
+}
+
+/* Contenedor del overlay */
+#overlay {
+  display: none; /* Ocultamos por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+  z-index: 9999; /* Lo pone encima de los demás elementos */
 }
