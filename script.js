@@ -6,101 +6,113 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 mymap.on('click', function(e) {
   console.log(e);
-
 })
 
-//Variables globales que representarán las coordenadas del marcador del destino
+// Definimos el nuevo icono usando la imagen green.png
+const greenIcon = L.icon({
+    iconUrl: 'images/green.png',
+    iconSize: [45, 60], // tamaño del icono
+    iconAnchor: [22, 60], // punto del icono que corresponderá a la posición del marcador
+    popupAnchor: [-3, -76] // punto desde el cual se abrirá el popup relativo al icono
+});
+
+const redIcon = L.icon({
+  iconUrl: 'images/Pin-location.png',
+  iconSize: [55, 60], // tamaño del icono
+  iconAnchor: [22, 60], // punto del icono que corresponderá a la posición del marcador
+  popupAnchor: [-3, -76] // punto desde el cual se abrirá el popup relativo al icono
+});
+
+// Variables globales que representarán las coordenadas del marcador del destino
 let latitud_destino;
 let longitud_destino;
 let marcado = false;
 var modal = document.getElementById("modal-ventana");
 var modal2 = document.getElementById("modal-ventana2");
+let seguimiento = null;
 
 
+// Definimos la ubicación actual del usuario representada con el marcador "marcador_posicion" inicializado con coordenadas 0,0
+var marcador_posicion = L.marker([0, 0], { icon: redIcon }).addTo(mymap);
+var polyline = L.polyline([], { color: 'red' }).addTo(mymap);
 
-//Definimos la ubicación actual del usuario representada con el marcador "marcador_posicion" inicializado con coordenadas 0,0
-const marcador_posicion=L.marker([0, 0]).addTo(mymap);
-var polyline = L.polyline([], {color: 'red'}).addTo(mymap);
-
-//llamamos a la función marcador() que da valor a las coordenadas del marcador
+// Llamamos a la función marcador() que da valor a las coordenadas del marcador
 marcador();
 
-
-
-
-//Función que crea un marcador en el destino del usuario
+// Función que crea un marcador en el destino del usuario
 function marcador() {
-
-  //Creamos un marcador en el mapa que representa el destino del usuario
+  // Creamos un marcador en el mapa que representa el destino del usuario
   mymap.once('click', function(e) {
-  console.log(e.latlng);
-  let marcador_destino = L.marker(e.latlng).addTo(mymap);
+    console.log(e.latlng);
+    let marcador_destino = L.marker(e.latlng, { icon: greenIcon }).addTo(mymap);
 
-  //obtenemos las coordenandas del marcador
-  latitud_destino = marcador_destino.getLatLng().lat;                                                                                                                                                                                                                                                                                                                                                                                                          
-  longitud_destino = marcador_destino.getLatLng().lng; 
-  marcado = true;
+    // Obtenemos las coordenandas del marcador
+    latitud_destino = marcador_destino.getLatLng().lat;
+    longitud_destino = marcador_destino.getLatLng().lng;
+    marcado = true;
 
-  //Circulo alrededor del marcador con 1 km de radio
-  circle = L.circle([latitud_destino, longitud_destino], {
-    color: 'red', 
-    fillColor: '#f03', 
-    fillOpacity: 0.5, 
-    radius: 1000 
-  }).addTo(mymap);
+    // Círculo alrededor del marcador con 1 km de radio
+    circle = L.circle([latitud_destino, longitud_destino], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.2,
+      radius: 1000
+    }).addTo(mymap);
   });
-
 }
 
-
-//Función que se ejecuta cada vez que el usuario se mueve y cuando esté a menos de 1km del destino hará vibrar el dispositivo móvil
+// Función que se ejecuta cada vez que el usuario se mueve y cuando esté a menos de 1km del destino hará vibrar el dispositivo móvil
 function vibrar() {
-  
-  //Se hace visible la ventana modal que muestra las indicaciones
+
+  // Verificar si se ha seleccionado un destino
+  if (!marcado) {
+    alert("Por favor, selecciona un destino en el mapa antes de comenzar.");
+    return;
+  }
+
+  // Se hace visible la ventana modal que muestra las indicaciones
   let modal = document.getElementById("modal-ventana");
   modal.style.display = "block";
-  //si el marcador del destino ha sido creado:
-  if (marcado==true){
-    //Obtenemos las coordenadas actuales del usuario en movimiento
+  
+  // Ocultar el botón "Comenzar"
+  document.querySelector('.boton2.comenzar').style.display = 'none';
+
+  // Si el marcador del destino ha sido creado:
+  if (marcado == true) {
+    // Obtenemos las coordenadas actuales del usuario en movimiento
     if ("geolocation" in navigator) {
       seguimiento = navigator.geolocation.watchPosition(function(position) {
-      
-      //El marcador "marcador_posicion" se mueve con el usuario
-      marcador_posicion.setLatLng([position.coords.latitude, position.coords.longitude]);
+        // El marcador "marcador_posicion" se mueve con el usuario
+        marcador_posicion.setLatLng([position.coords.latitude, position.coords.longitude]);
 
-      //En todo momento el mapa se centra en el marcador de la ubicación del usuario "marcador_posicion" y el marcador del destino "marcador_destino"
-      const latLngs = [marcador_posicion.getLatLng(), [latitud_destino, longitud_destino]];
-      const bounds = L.latLngBounds(latLngs);
-      mymap.fitBounds(bounds);
+        // En todo momento el mapa se centra en el marcador de la ubicación del usuario "marcador_posicion" y el marcador del destino "marcador_destino"
+        const latLngs = [marcador_posicion.getLatLng(), [latitud_destino, longitud_destino]];
+        const bounds = L.latLngBounds(latLngs);
+        mymap.fitBounds(bounds);
 
-      //También se añade una recta que una ambos marcadores
+        // También se añade una recta que una ambos marcadores
+        polyline.setLatLngs([[position.coords.latitude, position.coords.longitude], [latitud_destino, longitud_destino]]);
+        // Calculamos si la ubicación actual está dentro del radio de 1km
+        var dentro_del_radio = dentro_radio(position.coords.latitude, position.coords.longitude, latitud_destino, longitud_destino, 1);
 
-
-      
-      polyline.setLatLngs([[position.coords.latitude, position.coords.longitude], [latitud_destino, longitud_destino]]);
-      // calculamos si la ubicación actual está dentro del radio de 1km
-      var dentro_del_radio = dentro_radio(position.coords.latitude, position.coords.longitude, latitud_destino, longitud_destino, 1);
-      
-      //Si el usuario está a menos de 1km del destino, se mostrará un mensaje y el dispositivo vibrará
-      if (dentro_del_radio == true) {
-        let mensaje = document.getElementById("mensaje");
-        mensaje.innerHTML=("");
-        modal.style.display = "none";
-        modal2.style.display = "block";
-        navigator.vibrate(3000);
-    
-      }
-      else {
-        let mensaje = document.getElementById("mensaje");
-        mensaje.innerHTML=("Todavía estás a más de 1km de tu destino");
-        modal2.style.display="none";
-        mensaje.style.color = "black";
-      }
+        // Si el usuario está a menos de 1km del destino, se mostrará un mensaje y el dispositivo vibrará
+        if (dentro_del_radio == true) {
+          let mensaje = document.getElementById("mensaje");
+          mensaje.innerHTML = ("");
+          modal.style.display = "none";
+          modal2.style.display = "block";
+          navigator.vibrate(3000);
+        } else {
+          let mensaje = document.getElementById("mensaje");
+          mensaje.innerHTML = ("Todavía estás a más de 1km de tu destino");
+          modal2.style.display = "none";
+          mensaje.style.color = "black";
+        }
       });
+
     }
   }
 }
-
 
 function dentro_radio(latitud1, longitud1, latitud2, longitud2, radio) {
   const radio_tierra = 6371; // Radio de la Tierra en km
@@ -112,8 +124,7 @@ function dentro_radio(latitud1, longitud1, latitud2, longitud2, radio) {
   const longitud2_rad = longitud2 * Math.PI / 180;
 
   // Calcular la distancia entre las dos ubicaciones utilizando la fórmula de Haversine
-  const distancia = 2 * radio_tierra * Math.asin(Math.sqrt(Math.pow(Math.sin((latitud2_rad - latitud1_rad) / 2), 2) + Math.cos(latitud1_rad) * Math.cos(latitud2_rad) * Math.pow(Math.sin((longitud2_rad - longitud1_rad
-) / 2), 2)));
+  const distancia = 2 * radio_tierra * Math.asin(Math.sqrt(Math.pow(Math.sin((latitud2_rad - latitud1_rad) / 2), 2) + Math.cos(latitud1_rad) * Math.cos(latitud2_rad) * Math.pow(Math.sin((longitud2_rad - longitud1_rad) / 2), 2)));
 
   // Verificar si la distancia está dentro del radio
   if (distancia <= radio) {
@@ -123,32 +134,42 @@ function dentro_radio(latitud1, longitud1, latitud2, longitud2, radio) {
   }
 }
 
+// Función que elimina los marcadores destino y ubicación y el círculo de 1km
+function detener() {
+  marcado = false;
+  modal2.style.display = "none";
+  
+  // Mostrar el botón "Comenzar"
+  document.querySelector('.boton2.comenzar').style.display = 'block';
 
-//Función que elimina los marcadores destino y ubicación y el circulo de 1km
-function detener(){
-  modal2.style.display="none";
-  //Detenemos la obtención de la ubicación actual del usuario
-  navigator.geolocation.clearWatch(seguimiento);
-
-  //Eliminamos el marcador y el circulo
+  // Detenemos la obtención de la ubicación actual del usuario
+  if (seguimiento !== null) {
+    navigator.geolocation.clearWatch(seguimiento); // Esto detiene el seguimiento
+    seguimiento = null; // Limpiar la variable para que no quede con valor residual
+  }
+  // Eliminamos el marcador y el círculo
   mymap.removeLayer(circle);
   mymap.eachLayer(function(layer) {
     if (layer instanceof L.Marker) {
       mymap.removeLayer(layer);
     }
   });
-
-  //Eliminamos la recta que une los marcadores
+  // Eliminamos la recta que une los marcadores
   mymap.removeLayer(polyline);
-  
-  let mensaje = document.getElementById("mensaje");
-  mensaje.innerHTML=("¡Reinicia la aplicación y selecciona en el mapa tu destino!");
-  mensaje.style.color = "black";
+
+  marcador();
+  // Definimos la ubicación actual del usuario representada con el marcador "marcador_posicion" inicializado con coordenadas 0,0
+  marcador_posicion = L.marker([0, 0], { icon: redIcon }).addTo(mymap);
+  polyline = L.polyline([], { color: 'red' }).addTo(mymap);
+  // Eliminamos la recta que une los marcadores
+
+
+  // Llamamos a la función marcador() que da valor a las coordenadas del marcador
 
 }
 
-//función que cierra la ventana modal
-function cerrar(){
+// Función que cierra la ventana modal
+function cerrar() {
   modal = document.getElementById("modal-ventana");
   modal.style.display = "none";
 }

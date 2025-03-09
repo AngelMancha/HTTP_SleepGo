@@ -1,150 +1,140 @@
+/* Asegura que el body ocupe todo el alto disponible y no se salga del viewport */
 body {
-    padding: 0;
-    margin: 0;
-  }
-  
-  html, body{
-    height: 100%;
-  }
-  
-#header{
-  background-color: #401881;
-  height: 120px;
-  font-family: 'century gothic';
-  font-size: 30px;
-  text-align: center;
-  
-  color: aliceblue;
-}
-
-
-#mensaje{
-  font-family: "century gothic";
-  font-style: bold;
-  font-size: 30px;
-  text-align: center;
-}
-
-
-#sample_map{
-  height: 60%;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-radius: 3%;
-  z-index: 0;
-}
-
-
-.boton2{
-  width: 50%;
-  background-color: rgb(64, 24, 129);
-  color: aliceblue;
-  font-family: 'century gothic';
-  font-size: 23px;
-  text-align: center;
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  height: 20%;
-  border-radius: 100px;
-  text-align: center;
-  border: 2px solid aliceblue;
-}
-
-.boton2:hover{
-  background-color: rgb(64, 24, 129);
-  color: aliceblue;
-  font-family: 'century gothic';
-  font-size: 23px;
-  text-align: center;
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  height: 20%;
-  border-radius: 100px;
-  text-align: center;
-  opacity: 0.5;
-  border: 2px solid aliceblue;
-}
-
-#botones{
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  transition: background-color 0.3s ease;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100vh; /* 100% de la altura del viewport */
+}
+
+/* HTML y body ocupan el 100% de la altura de la pantalla */
+html, body {
+  height: 100%;
+}
+
+/* Estilos del header */
+#header {
+  background-color: #6200ea;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el mensaje */
+#mensaje {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Contenedor del mapa */
+#sample_map {
+  position: relative;
+  flex-grow: 1; /* Esto hace que el mapa ocupe todo el espacio disponible entre el header y el footer */
+  margin: 1%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: calc(100% - 20%); /* Ajustamos la altura para que no se superponga al footer */
+}
+
+/* El mapa toma todo el espacio dentro del contenedor */
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Estilo para los botones */
+.boton2 {
+  width: 45%;
+  background-color: #6200ea;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  margin: 1%;
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.boton2:hover {
+  background-color: #3700b3;
+  transform: scale(1.05);
+}
+
+/* Contenedor de botones */
+#botones {
+  display: flex;
   justify-content: space-around;
   align-items: center;
   height: 10%;
 }
 
-#icono_volumen{
-  color: black;
-  size: 100px;
+/* Estilo para el footer, con posición fija */
+#footer {
+  background-color: #6200ea;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el ancho */
 }
 
-#footer{
-
-  background-color: #401881;
-  height: 100px;
-  font-family: 'century gothic';
-  font-size: 30px;
-  text-align: center;
-  color: aliceblue;
-}
-
-#modal-ventana{
+/* Estilo para las ventanas modales */
+#modal-overlay {
   display: none;
-  margin-left: 30%;
-  margin-right: 50%;
-  margin-bottom: -10%;
   position: fixed;
-  background-color: #401881;
-  width: 40%;
-  opacity: 90%;
-  font-family: 'century gothic';
-  font-size: 30px;
-  text-align: center;
-  color: aliceblue;
-  z-index: 11;
-  border-radius: 5%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 11110;
 }
 
-#modal-ventana2{
+#modal-ventana, #modal-ventana2 {
   display: none;
-  margin-left: 30%;
-  margin-right: 50%;
-  margin-bottom: -10%;
-  margin-top: 20%;
-  position: fixed;
-  background-color: #401881;
+  position: absolute;
+  background-color: #6200ea;
   width: 40%;
-  opacity: 90%;
-  font-family: 'century gothic';
-  font-size: 30px;
+  padding: 20px;
+  opacity: 0.9;
+  font-size: 20px;
   text-align: center;
-  color: aliceblue;
-  z-index: 11;
+  color: #fff;
+  z-index: 11111;
   border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-
-.img_marcador{
-  position:fixed;
+/* Estilo para la imagen del marcador */
+.img_marcador {
+  position: fixed;
   margin-top: -7%;
   margin-left: 12%;
-  margin-right: 0%;
   z-index: -1;
 }
 
 @media (min-width: 768px) {
-  .img_marcador{
-    position:fixed;
-    margin-top: -2%;
-    margin-left: 18%;
-    margin-right: 0%;
-    z-index: -1;
+  .img_marcador {
+      margin-top: -2%;
+      margin-left: 18%;
   }
-
 }
-
-
